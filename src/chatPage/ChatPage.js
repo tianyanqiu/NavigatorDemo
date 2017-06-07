@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { View, Text, Button, StatusBar } from "react-native";
+import { View, Text, Button, StatusBar, Platform } from "react-native";
 
 export default function ChatPage(props) {
   const { params } = props.navigation.state;
   return (
     <View>
-      <StatusBar backgroundColor="blue" barStyle="dark-content" />
       <Text>Chat with {params.user}</Text>
       <Button onPress={() => props.navigation.navigate('Detail')} title="进入详情页"></Button>
     </View>
@@ -21,6 +20,7 @@ ChatPage.navigationOptions = ({ navigation }) => {
       <Button
         title={isInfo ? "Done" : `${user}'s Info`}
         onPress={() => setParams({ mode: isInfo ? "none" : "info" })}
+        color={Platform.OS ==='ios' ? '#fff' : null}
       />
     ),
   };

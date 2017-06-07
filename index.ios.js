@@ -5,8 +5,15 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, View, StatusBar } from 'react-native';
 import App from './src/App';
 
+function NavigatorDemo(){
+    return (
+        <App><StatusBar backgroundColor="red"></StatusBar></App>
+    
+    )
+}
 
-AppRegistry.registerComponent('NavigatorDemo', () => App);
+
+AppRegistry.registerComponent('NavigatorDemo', () => NavigatorDemo);
