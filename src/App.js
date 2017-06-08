@@ -20,10 +20,14 @@ const MainApp = StackNavigator(
       },
       headerBackTitle: "返回",
       headerTintColor: "#fff"
-    },
+    }
   }
 );
 //安卓的URL前缀应包括host
 const prefix = Platform.OS == "android" ? "mychat://mychat/" : "mychat://";
 
-export default App = () => <MainApp uriPrefix={prefix} ></MainApp>;
+export default (App = () =>
+  <View style={{flex: 1}}>
+    <StatusBar backgroundColor="#387ef5" barStyle="light-content" />
+    <MainApp uriPrefix={prefix} />
+  </View>);

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, Button, StatusBar } from "react-native";
+import { View, Text, Button } from "react-native";
 import page from "../CreatePages";
 
 function Home(props) {
   const { navigate } = props.navigation;
   return (
     <View>
-      <StatusBar backgroundColor="#387ef5" barStyle="light-content" />
       <Text>Hello, Navigation!</Text>
       <Button
         onPress={() => navigate("Chat", { user: "John" })}
@@ -18,9 +17,9 @@ function Home(props) {
 
 const HomePage = page({
   navigationOptions: {
-    title: "HomePage",
+    title: "HomePage"
   },
-  color: 'dark'
+  color: "dark",
 })(Home);
 
 export default HomePage;
