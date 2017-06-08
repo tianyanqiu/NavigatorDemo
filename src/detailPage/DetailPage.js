@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {View, Text, Button} from 'react-native';
+import page from "../CreatePages";
 
-export default function DetailPage(props) {
+function Detail(props) {
         return (
       <View>
         <Text>Hello, Navigation!</Text>
@@ -13,6 +14,9 @@ export default function DetailPage(props) {
     );
 }
 
-DetailPage.navigationOptions = {
+export default DetailPage= page({
+  navigationOptions: {
     title: 'DetailPage'
 }
+  
+})(Detail)
