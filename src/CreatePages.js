@@ -25,14 +25,36 @@ function getColor(name) {
   return color[name];
 }
 
+const transitionEndEventHandlers = [];
+export function onTransitionEnd() {
+  transitionEndEventHandlers.forEach(fn => fn());
+}
+
+function removeEventHandler(fn) {
+  for (let i = 0; i < transitionEndEventHandlers.length; i++) {
+    if (transitionEndEventHandlers[i] === fn) {
+      delete transitionEndEventHandlers[i];
+    }
+  }
+}
+
 export default function page({ navigationOptions, color, statusBar, loading }) {
   return Comp => {
     return class NavigatorPage extends Component {
       constructor(props) {
         super();
         this.state = {
-          loading: false
+          transitionEnd: loading ? false : true
         };
+
+        this.fn = () => {
+          this.setState({
+            transitionEnd: true
+          });
+          removeEventHandler(this.fn);
+        };
+
+        transitionEndEventHandlers.push(this.fn);
       }
       static navigationOptions = typeof navigationOptions === "object"
         ? {
@@ -43,30 +65,16 @@ export default function page({ navigationOptions, color, statusBar, loading }) {
           }
         : navigationOptions;
 
-      componentWillMount() {
-          this.setState({
-            loading: loading && true
-          });
-      }
-
-      componentDidMount() {
-        this.timer =  setTimeout(() => {
-         loading && this.setState({
-            loading: false
-          });
-        }, 1000);
-      }
-
       componentWillUnmount() {
-        this.timer && clearTimeout(this.timer)
+        removeEventHandler(this.fn);
       }
 
       render() {
         return (
           <ScrollView>
             {statusBar && <StatusBar {...statusBar} />}
-            {this.state.loading && loading}
-            {!this.state.loading && <Comp {...this.props} />}
+            {!this.state.transitionEnd && loading}
+            {this.state.transitionEnd && <Comp {...this.props} />}
           </ScrollView>
         );
       }

@@ -4,6 +4,7 @@ import { StackNavigator } from "react-navigation";
 import HomePage from "./homePage/HomePage";
 import ChatPage from "./chatPage/ChatPage";
 import DetailPage from "./detailPage/DetailPage";
+import { onTransitionEnd } from './CreatePages';
 
 const MainApp = StackNavigator(
   {
@@ -21,6 +22,7 @@ const MainApp = StackNavigator(
       headerBackTitle: "返回",
       headerTintColor: "#fff"
     },
+    onTransitionEnd: onTransitionEnd
   }
 );
 //安卓的URL前缀应包括host
