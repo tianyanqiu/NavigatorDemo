@@ -29,7 +29,7 @@ const navigationOptions = ({navigation}) => {
 }
 
 const ChatPage = page({
-  navigationOptions: navigationOptions 
+  navigationOptions: navigationOptions,
 })(Chat);
 
 export default ChatPage;
