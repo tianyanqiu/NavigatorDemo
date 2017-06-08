@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, Button, StatusBar, Platform } from "react-native";
+import page from "../CreatePages";
 
-export default function ChatPage(props) {
+function Chat(props) {
   const { params } = props.navigation.state;
   return (
     <View>
@@ -10,7 +11,8 @@ export default function ChatPage(props) {
     </View>
   );
 }
-ChatPage.navigationOptions = ({ navigation }) => {
+
+const navigationOptions = ({navigation}) => {
   const { state, setParams } = navigation;
   const isInfo = state.params.mode === "info";
   const { user } = state.params;
@@ -24,4 +26,10 @@ ChatPage.navigationOptions = ({ navigation }) => {
       />
     ),
   };
-};
+}
+
+const ChatPage = page({
+  navigationOptions: navigationOptions 
+})(Chat);
+
+export default ChatPage;
