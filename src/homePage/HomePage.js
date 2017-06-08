@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, Button, StatusBar } from "react-native";
+import page from "../CreatePages";
 
-export default function HomePage(props) {
+function Home(props) {
   const { navigate } = props.navigation;
   return (
     <View>
@@ -15,6 +16,11 @@ export default function HomePage(props) {
   );
 }
 
-HomePage.navigationOptions = {
-  title: "HomePage"
-};
+const HomePage = page({
+  navigationOptions: {
+    title: "HomePage",
+  },
+  color: 'dark'
+})(Home);
+
+export default HomePage;
