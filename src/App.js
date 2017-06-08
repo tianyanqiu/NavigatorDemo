@@ -20,7 +20,7 @@ const MainApp = StackNavigator(
       },
       headerBackTitle: "返回",
       headerTintColor: "#fff"
-    }
+    },
   }
 );
 //安卓的URL前缀应包括host

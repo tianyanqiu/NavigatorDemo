@@ -25,9 +25,15 @@ function getColor(name) {
   return color[name];
 }
 
-export default function page({ navigationOptions, color, statusBar }) {
+export default function page({ navigationOptions, color, statusBar, loading }) {
   return Comp => {
     return class NavigatorPage extends Component {
+      constructor(props) {
+        super();
+        this.state = {
+          loading: false
+        };
+      }
       static navigationOptions = typeof navigationOptions === "object"
         ? {
             headerStyle: {
@@ -36,11 +42,31 @@ export default function page({ navigationOptions, color, statusBar }) {
             ...navigationOptions
           }
         : navigationOptions;
+
+      componentWillMount() {
+          this.setState({
+            loading: loading && true
+          });
+      }
+
+      componentDidMount() {
+        this.timer =  setTimeout(() => {
+         loading && this.setState({
+            loading: false
+          });
+        }, 1000);
+      }
+
+      componentWillUnmount() {
+        this.timer && clearTimeout(this.timer)
+      }
+
       render() {
         return (
           <ScrollView>
             {statusBar && <StatusBar {...statusBar} />}
-            <Comp {...this.props} />
+            {this.state.loading && loading}
+            {!this.state.loading && <Comp {...this.props} />}
           </ScrollView>
         );
       }
